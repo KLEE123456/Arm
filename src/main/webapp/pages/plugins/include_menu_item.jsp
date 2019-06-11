@@ -12,7 +12,7 @@
 		<!-- Sidebar user panel -->
 		<div class="user-panel">
 			<div class="pull-left image">
-				<img src="upload/emp/nophoto.png" class="img-circle"
+				<img src="${pageContext.request.contextPath}/upload/emp/${userMsg.eid}.jpg" class="img-circle"
 					alt="User Image">
 			</div>
 			<div class="pull-left info">

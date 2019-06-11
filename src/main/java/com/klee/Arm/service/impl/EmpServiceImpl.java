@@ -17,8 +17,18 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public Emp XREmp(int eid) {
-        return empDao.XREmp(eid);
+    public Emp xREmp(int eid) {
+        return empDao.xREmp(eid);
+    }
+
+    @Override
+    public int editEmp(Emp emp) {
+        return empDao.editEmp(emp);
+    }
+
+    @Override
+    public int addAdm(Emp emp) {
+        return empDao.addAdm(emp);
     }
 
 

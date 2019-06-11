@@ -31,7 +31,7 @@ public class LoginController{
         }
         else {
             model.addAttribute("eid",emp.getEid());
-            model.addAttribute("msg","用户编号或密码错误!");
+            model.addAttribute("msg","雇员编号或密码错误!");
             return "login";
         }
     }

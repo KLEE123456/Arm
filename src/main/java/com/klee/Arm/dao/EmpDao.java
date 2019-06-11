@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface EmpDao {
     List<Emp>  findEmp();
-    Emp XREmp(int eid);
+    Emp xREmp(int eid);
+    int editEmp(Emp emp);
+    int addAdm(Emp emp);
 }

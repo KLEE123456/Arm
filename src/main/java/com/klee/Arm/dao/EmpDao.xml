@@ -7,7 +7,46 @@
     <select id="findEmp" resultType="emp">
         select * from  emp
     </select>
-    <select id="XREmp" resultType="emp" parameterType="int">
+    <select id="xREmp" resultType="emp" parameterType="int">
         select * from  emp where eid=#{eid}
     </select>
+   <update id="editEmp" parameterType="emp">
+        update  emp
+        <set>
+            <if test="did != null">
+                did=#{did} ,
+            </if>
+            <if test="lid != null">
+                lid=#{lid} ,
+            </if>
+            <if test="name != null and name != ''">
+                name=#{name} ,
+            </if>
+            <if test="password != null and password != ''">
+                password=#{password} ,
+            </if>
+            <if test="phone != null and phone != ''">
+                phone=#{phone} ,
+            </if>
+            <if test="salary != null">
+                salary=#{salary} ,
+            </if>
+            <if test="note != null and note != ''">
+                note=#{note} ,
+            </if>
+            <if test="aflag != null">
+                aflag=#{aflag} ,
+            </if>
+            <if test="sex != null and sex != ''">
+                sex=#{sex} ,
+            </if>
+            <if test="photo != null and photo != ''">
+                photo=#{photo} ,
+            </if>
+        </set>
+        where eid=#{eid}
+   </update>
+  <insert id="addAdm" parameterType="emp">
+      insert into emp(eid, name, did, password, phone, lid, salary, photo, note) values (#{eid} ,#{name} ,#{did} ,#{password} ,#{phone} ,#{lid} ,#{salary} ,#{photo},#{note})
+  </insert>
 </mapper>

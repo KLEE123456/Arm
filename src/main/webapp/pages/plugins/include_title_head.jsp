@@ -19,19 +19,19 @@
 			<ul class="nav navbar-nav">
 				<li class="dropdown user user-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <img
-						src="upload/emp/nophoto.png" class="user-image" alt="User Image">
+						src="${pageContext.request.contextPath}/${userMsg.photo}" class="user-image" alt="User Image">
 						<span class="hidden-xs">${userMsg.name}</span>
 				</a>
 					<ul class="dropdown-menu"> 
 						<!-- User image -->
-						<li class="user-header"><img src="upload/emp/nophoto.png"
+						<li class="user-header"><img src="${pageContext.request.contextPath}/${userMsg.photo}"
 							class="img-circle" alt="User Image">
 							</p></li>
 						<!-- Menu Body -->
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="text-center">
-								<a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-default btn-flat">系统注销</a>
+								<a href="${pageContext.request.contextPath}/pages/login.jsp" class="btn btn-default btn-flat">系统注销</a>
 							</div>
 						</li>
 					</ul></li>
