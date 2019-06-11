@@ -18,7 +18,18 @@
 			document.getElementById("sex${emp.sex}").checked="checked";
 			document.getElementById("d${emp.did}").selected="selected";
 			document.getElementById("l${emp.lid}").selected="selected";
+			document.getElementById("a${emp.aflag}").selected="selected";
 		});
+		$(function () {
+			$("#btnEdit").click(function () {
+				var val=$("#photo").val();
+				if (val==''){
+					$("#photoMsg").text("请选择文件!");
+					return;
+				}
+				$("#myform").submit();
+			})
+		})
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -75,6 +86,7 @@
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="sexMsg"></div>
 									</div>
+
 									<div class="form-group" id="dept.did">
 										<!-- 定义表单提示文字 -->
 										<label class="col-md-3 control-label" for="dept.did">所属部门：</label>
@@ -85,6 +97,18 @@
 												<option value="3" id="d3">行政部</option>
 												<option value="4" id="d4" selected>市场部</option>
 												<option value="5" id="d5">财务部</option>
+											</select>
+										</div>
+										<!-- 定义表单错误提示显示元素 -->
+										<div class="col-md-4" id="level.lidMsg"></div>
+									</div>
+									<div class="form-group" id="dept.did">
+										<!-- 定义表单提示文字 -->
+										<label class="col-md-3 control-label" for="dept.did">特殊标记：</label>
+										<div class="col-md-5">
+											<select id="aflag" name="aflag" class="form-control">
+												<option value="2" id="a2">普通管理员</option>
+												<option value="0" id="a0" selected>普通雇员</option>
 											</select>
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
@@ -149,7 +173,7 @@
 												placeholder="请上传员工照片" multiple="multiple">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
-										<div class="col-md-4" id="photoMsg"></div>
+										<div class="col-md-4" id="photoMsg" style="color: red"></div>
 									</div>
 									<!-- 定义输入表单样式，其中id主要用于设置颜色样式 -->
 									<div class="form-group" id="notice.noteDiv">
@@ -164,7 +188,7 @@
 									</div>
 									<div class="form-group">
 										<div class="col-md-5 col-md-offset-3">
-											<button type="submit" class="btn btn-primary">增加</button>
+											<button type="button" class="btn btn-primary" id="btnEdit">编辑</button>
 											<button type="reset" class="btn btn-warning">重置</button>
 										</div>
 									</div>

@@ -57,7 +57,7 @@
 												<td>${emp.phone}</td>
 												<td>${emp.sex}</td>
 												<td>${emp.salary}</td>
-												<td><a class="btn btn-warning btn-xs" href="${pageContext.request.contextPath}/emp/XREmp.action?eid=${emp.eid}">编辑</a></td>
+												<td><a class="btn btn-warning btn-xs" href="${pageContext.request.contextPath}/emp/XREmp.action?eid=${emp.eid}&method=admEdit">编辑</a></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>

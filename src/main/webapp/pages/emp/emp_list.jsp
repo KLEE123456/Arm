@@ -5,7 +5,8 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+<%@taglib prefix="c" uri="/WEB-INF/c.tld" %>
+<%@page isELIgnored="false" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -31,93 +32,34 @@
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover">
 								<tr>
-									<th>雇员编号</th>
+									<th>管理员编号</th>
 									<th>姓名</th>
 									<th>联系电话</th>
 									<th>性别</th>
 									<th>基本工资</th>
 									<th>操作</th>
 								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
-								<tr>
-									<td>0000</td>
-									<td>诸葛亮</td>
-									<td>110</td>
-									<td>男</td>
-									<td>8900.00</td>
-									<td><a class="btn btn-warning btn-xs" href="pages/emp/emp_edit.jsp">编辑</a></td>
-								</tr>
+								<c:choose>
+									<c:when test="${empList.size()==0}">
+										<tr>
+											<td colspan="6">
+												<font color="red">不存在雇员信息!</font>
+											</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${empList}" var="emp" varStatus="status">
+											<tr>
+												<td>${emp.eid}</td>
+												<td>${emp.name}</td>
+												<td>${emp.phone}</td>
+												<td>${emp.sex}</td>
+												<td>${emp.salary}</td>
+												<td><a class="btn btn-warning btn-xs" href="${pageContext.request.contextPath}/emp/XREmp.action?eid=${emp.eid}">编辑</a></td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</table>
 						</div>
 						<!-- /.box-body -->

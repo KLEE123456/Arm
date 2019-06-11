@@ -32,7 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             Emp emp=(Emp) session.getAttribute("userMsg");
             if (emp==null){
                 request.setAttribute("msg","您还没有进行登录,请先登录!");
-                request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request,response);
+                request.getRequestDispatcher("/pages/login.jsp").forward(request,response);
                 return  false;
             }
             else {

@@ -4,7 +4,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String addUrl = basePath + "" ;
+	String editUrl = basePath + "" ;
 %>
 <%@page isELIgnored="false" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -12,26 +12,22 @@
 <head>
 <base href="<%=basePath%>">
 <jsp:include page="/pages/plugins/include_javascript_head.jsp" /> 
-<script type="text/javascript" src="js/pages/emp/emp_add.js"></script>
+<script type="text/javascript" src="js/pages/emp/emp_edit.js"></script>
 	<script type="text/javascript">
+		$(document).ready(function(){
+			document.getElementById("sex${emp.sex}").checked="checked";
+			document.getElementById("d${emp.did}").selected="selected";
+			document.getElementById("l${emp.lid}").selected="selected";
+			document.getElementById("a${emp.aflag}").selected="selected";
+		});
 		$(function () {
-			$("#eid").blur(function () {
-				var eid=$("#eid").val();
-				$.ajax({
-					type:"post",
-					url:"${pageContext.request.contextPath}/emp/checkEid.action",
-					data:{eid:eid},
-					success:function (data) {
-						if (data=="true"){
-							$("#eidMsg").text("雇员编号检测通过,可进行添加!");
-							document.getElementById("addBtn").disabled=false;
-						}
-						if (data=="false"){
-							$("#eidMsg").text("雇员编号已存在，请更换!");
-							document.getElementById("addBtn").disabled=true;
-						}
-					}
-				});
+			$("#btnEdit").click(function () {
+				var val=$("#photo").val();
+				if (val==''){
+					$("#photoMsg").text("请选择文件!");
+					return;
+				}
+				$("#myform").submit();
 			})
 		})
 	</script>
@@ -48,11 +44,11 @@
 				<div class="col-xs-12">
 					<div class="box">
 						<div class="box-header">
-							<h3 class="box-title"><strong>增加新雇员</strong></h3>
+							<h3 class="box-title"><strong>修改管理员信息</strong></h3>
 						</div>
 						<!-- /.box-header -->
 						<div class="">
-							<form class="form-horizontal" action="${pageContext.request.contextPath}/emp/addEmps.action" id="myform" method="post" enctype="multipart/form-data">
+							<form class="form-horizontal" action="${pageContext.request.contextPath}/emp/editEmp.action?method=admEdit" id="myform" method="post" enctype="multipart/form-data">
 								<fieldset>
 									<div class="form-group" id="eidDiv">
 										<!-- 定义表单提示文字 -->
@@ -60,10 +56,10 @@
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
 											<input type="text" id="eid" name="eid" class="form-control"
-												placeholder="请输入雇员编号">
+												placeholder="请输入雇员编号" value="${emp.eid}" readonly="readonly">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
-										<div class="col-md-4" id="eidMsg" style="color: red"></div>
+										<div class="col-md-4" id="eidMsg"></div>
 									</div>
 									<div class="form-group" id="nameDiv">
 										<!-- 定义表单提示文字 -->
@@ -71,7 +67,7 @@
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
 											<input type="text" id="name" name="name" class="form-control"
-												placeholder="请输入雇员姓名">
+												placeholder="请输入雇员姓名" value="${emp.name}">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="nameMsg"></div>
@@ -90,15 +86,29 @@
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="sexMsg"></div>
 									</div>
+
 									<div class="form-group" id="dept.did">
 										<!-- 定义表单提示文字 -->
 										<label class="col-md-3 control-label" for="dept.did">所属部门：</label>
 										<div class="col-md-5">
 											<select id="dept.did" name="did" class="form-control">
-												<option value="2">人事部</option>
-												<option value="3">行政部</option>
-												<option value="4" selected>市场部</option>
-												<option value="5">财务部</option>
+												<option value="1" id="d1">管理部</option>
+												<option value="2" id="d2">人事部</option>
+												<option value="3" id="d3">行政部</option>
+												<option value="4" id="d4" selected>市场部</option>
+												<option value="5" id="d5">财务部</option>
+											</select>
+										</div>
+										<!-- 定义表单错误提示显示元素 -->
+										<div class="col-md-4" id="level.lidMsg"></div>
+									</div>
+									<div class="form-group" id="dept.did">
+										<!-- 定义表单提示文字 -->
+										<label class="col-md-3 control-label" for="dept.did">特殊标记：</label>
+										<div class="col-md-5">
+											<select id="aflag" name="aflag" class="form-control">
+												<option value="2" id="a2">普通管理员</option>
+												<option value="0" id="a0" selected>普通雇员</option>
 											</select>
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
@@ -106,11 +116,11 @@
 									</div>
 									<div class="form-group" id="passwordDiv">
 										<!-- 定义表单提示文字 -->
-										<label class="col-md-3 control-label" for="password">登录密码：</label>
+										<label class="col-md-3 control-label" for="password" >登录密码：</label>
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
 											<input type="password" id="password" name="password" class="form-control"
-												placeholder="请输入登录密码">
+												placeholder="请输入登录密码" value="${emp.password}">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="passwordMsg"></div>
@@ -121,7 +131,7 @@
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
 											<input type="text" id="phone" name="phone" class="form-control"
-												placeholder="请输入联系电话">
+												placeholder="请输入联系电话" value="${emp.phone}">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="phoneMsg"></div>
@@ -131,13 +141,13 @@
 										<label class="col-md-3 control-label" for="level.lid">员工级别：</label>
 										<div class="col-md-5">
 											<select id="level.lid" name="lid" class="form-control">
-												<option value="1">实习生</option>
-												<option value="2" selected>普通员工</option>
-												<option value="3">部门主管</option>
-												<option value="4">部门经理</option>
-												<option value="5">总监</option>
-												<option value="6">副总裁</option>
-												<option value="7">总裁</option>
+												<option value="1" id="l1">实习生</option>
+												<option value="2" id="l2" selected>普通员工</option>
+												<option value="3" id="l3">部门主管</option>
+												<option value="4" id="l4">部门经理</option>
+												<option value="5" id="l5">总监</option>
+												<option value="6" id="l6">副总裁</option>
+												<option value="7" id="l7">总裁</option>
 											</select>
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
@@ -149,33 +159,21 @@
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
 											<input type="text" id="salary" name="salary" class="form-control"
-												placeholder="请输入基本工资">
+												placeholder="请输入基本工资" value="${emp.salary}">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="salaryMsg"></div>
-									</div>
-									<div class="form-group" id="level.lid">
-										<!-- 定义表单提示文字 -->
-										<label class="col-md-3 control-label" for="level.lid">特殊标记：</label>
-										<div class="col-md-5">
-											<select id="level.lid" name="aflag" class="form-control">
-												<option value="2">普通管理员</option>
-												<option value="0" selected>普通雇员</option>
-											</select>
-										</div>
-										<!-- 定义表单错误提示显示元素 -->
-										<div class="col-md-4" id="flagMsg"></div>
 									</div>
 									<div class="form-group" id="photoDiv">
 										<!-- 定义表单提示文字 -->
 										<label class="col-md-3 control-label" for="photo">雇员照片：</label>
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
-											<input type="file" id="photo" name="uploadfile" class="form-control"
+											<input type="file" id="photo"  name="uploadfile" class="form-control"
 												placeholder="请上传员工照片" multiple="multiple">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
-										<div class="col-md-4" id="photoMsg"></div>
+										<div class="col-md-4" id="photoMsg" style="color: red"></div>
 									</div>
 									<!-- 定义输入表单样式，其中id主要用于设置颜色样式 -->
 									<div class="form-group" id="notice.noteDiv">
@@ -183,14 +181,14 @@
 										<label class="col-md-3 control-label" for="note">备注信息：</label>
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
-											<textarea id="note" name="note" class="form-control" placeholder="请输入公告信息" rows="10"></textarea>
+											<textarea id="note" name="note" class="form-control" placeholder="请输入公告信息" rows="10">${emp.note}</textarea>
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
-										<div class="col-md-4" id="noteMsg">${addError}</div>
+										<div class="col-md-4" id="noteMsg">${errorMsg}</div>
 									</div>
 									<div class="form-group">
 										<div class="col-md-5 col-md-offset-3">
-											<button type="submit" class="btn btn-primary" id="addBtn">增加</button>
+											<button type="button" class="btn btn-primary" id="btnEdit">编辑</button>
 											<button type="reset" class="btn btn-warning">重置</button>
 										</div>
 									</div>

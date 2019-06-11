@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.klee.Arm.dao.EmpDao">
 
-    <select id="findEmp" resultType="emp">
-        select * from  emp
+    <select id="findAdm" resultType="emp">
+        select * from  emp where emp.aflag in (1,2)
     </select>
-    <select id="xREmp" resultType="emp" parameterType="int">
+    <select id="xRAdm" resultType="emp" parameterType="int">
         select * from  emp where eid=#{eid}
     </select>
-   <update id="editEmp" parameterType="emp">
+   <update id="editAdm" parameterType="emp">
         update  emp
         <set>
             <if test="did != null">
@@ -34,11 +34,11 @@
             <if test="note != null and note != ''">
                 note=#{note} ,
             </if>
-            <if test="aflag != null">
-                aflag=#{aflag} ,
-            </if>
             <if test="sex != null and sex != ''">
                 sex=#{sex} ,
+            </if>
+            <if test="aflag != null">
+                aflag=#{aflag},
             </if>
             <if test="photo != null and photo != ''">
                 photo=#{photo} ,
@@ -47,6 +47,14 @@
         where eid=#{eid}
    </update>
   <insert id="addAdm" parameterType="emp">
-      insert into emp(eid, name, did, password, phone, lid, salary, photo, note) values (#{eid} ,#{name} ,#{did} ,#{password} ,#{phone} ,#{lid} ,#{salary} ,#{photo},#{note})
+      insert into emp (eid, did,heid, lid, name, password, phone, salary, note, aflag,sex, photo)
+      values (#{eid} ,#{did} ,1000,#{lid} ,#{name},#{password} ,#{phone} ,#{salary} ,#{note} ,2 ,#{sex} ,#{photo} )
   </insert>
+    <select id="findEmp" resultType="emp">
+        select * from emp
+    </select>
+   <insert id="addEmp" parameterType="emp">
+        insert  into  emp
+        values (#{eid} ,#{did} ,#{lid} ,1000 ,#{name} ,#{password} ,#{phone} ,#{salary} ,#{note} ,#{aflag} ,#{sex} ,#{photo} )
+   </insert>
 </mapper>

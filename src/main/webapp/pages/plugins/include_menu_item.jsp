@@ -12,7 +12,7 @@
 		<!-- Sidebar user panel -->
 		<div class="user-panel">
 			<div class="pull-left image">
-				<img src="${pageContext.request.contextPath}/upload/emp/${userMsg.eid}.jpg" class="img-circle"
+				<img src="${pageContext.request.contextPath}/${userMsg.photo}" class="img-circle"
 					alt="User Image">
 			</div>
 			<div class="pull-left info">
@@ -41,7 +41,7 @@
 							class="fa fa-circle-o"></i> 部门列表</a></li>
 					<li><a href="pages/emp/emp_add.jsp"><i
 							class="fa fa-circle-o"></i> 增加员工</a></li>
-					<li><a href="pages/emp/emp_list.jsp"><i
+					<li><a href="${pageContext.request.contextPath}/emp/findEmps.action"><i
 							class="fa fa-circle-o"></i> 员工列表</a></li>
 				</ul></li>
 			<li class="treeview"><a href="<%=basePath%>pages/index.jsp"> <i class="fa  fa-folder-open"></i>

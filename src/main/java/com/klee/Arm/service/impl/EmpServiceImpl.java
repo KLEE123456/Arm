@@ -12,23 +12,34 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpDao empDao;
     @Override
-    public List<Emp> findEmp() {
-        return empDao.findEmp();
+    public List<Emp> findAdm() {
+        return empDao.findAdm();
     }
 
     @Override
-    public Emp xREmp(int eid) {
-        return empDao.xREmp(eid);
+    public Emp xRAdm(int eid) {
+        return empDao.xRAdm(eid);
     }
 
     @Override
-    public int editEmp(Emp emp) {
-        return empDao.editEmp(emp);
+    public int editAdm(Emp emp) {
+        return empDao.editAdm(emp);
     }
 
     @Override
     public int addAdm(Emp emp) {
         return empDao.addAdm(emp);
+    }
+
+    @Override
+    public List<Emp> findEmp() {
+        return empDao.findEmp();
+    }
+
+    @Override
+    public int addEmp(Emp emp) {
+
+        return empDao.addEmp(emp);
     }
 
 
