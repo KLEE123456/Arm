@@ -1,5 +1,6 @@
 package com.klee.Arm.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.klee.Arm.dao.EmpDao;
 import com.klee.Arm.pojo.Emp;
 import com.klee.Arm.service.EmpService;
@@ -12,8 +13,13 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpDao empDao;
     @Override
-    public List<Emp> findAdm() {
-        return empDao.findAdm();
+    public List<Emp> findAdm(Integer pageNum) {
+        if (pageNum==null){
+            pageNum=1;
+        }
+        PageHelper.startPage(pageNum,2);
+        List<Emp> empList=empDao.findAdm();
+        return empList;
     }
 
     @Override
@@ -32,8 +38,13 @@ public class EmpServiceImpl implements EmpService {
     }
 
     @Override
-    public List<Emp> findEmp() {
-        return empDao.findEmp();
+    public List<Emp> findEmp(Integer pageNum) {
+        if (pageNum==null){
+            pageNum=1;
+        }
+        PageHelper.startPage(pageNum,5);
+        List<Emp> empList=empDao.findEmp();
+        return empList;
     }
 
     @Override

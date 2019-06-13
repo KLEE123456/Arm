@@ -5,7 +5,8 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+<%@page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -34,31 +35,22 @@
 									<th>栏目名称</th>
 									<th>操作</th>
 								</tr>
-								<tr>
-									<td><input type="text" name="title-1" id="title-1" value="文件档案用品" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-1"><span class="fa fa-pencil-square"></span> 修改</button>
-										<a href="pages/type/subtype_list.jsp" class="btn btn-warning"><span class="fa fa-list-alt"></span> 查看子栏目</a></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="title-2" id="title-2" value="桌面用品" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-2"><span class="fa fa-pencil-square"></span> 修改</button>
-										<a href="pages/type/subtype_list.jsp" class="btn btn-warning"><span class="fa fa-list-alt"></span> 查看子栏目</a></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="title-3" id="title-3" value="办公设备" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-3"><span class="fa fa-pencil-square"></span> 修改</button>
-										<a href="pages/type/subtype_list.jsp" class="btn btn-warning"><span class="fa fa-list-alt"></span> 查看子栏目</a></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="title-4" id="title-4" value="财务用品" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-4"><span class="fa fa-pencil-square"></span> 修改</button>
-										<a href="pages/type/subtype_list.jsp" class="btn btn-warning"><span class="fa fa-list-alt"></span> 查看子栏目</a></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="title-5" id="title-5" value="办公耗材" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-5"><span class="fa fa-pencil-square"></span> 修改</button>
-										<a href="pages/type/subtype_list.jsp" class="btn btn-warning"><span class="fa fa-list-alt"></span> 查看子栏目</a></td>
-								</tr>
+								<c:choose>
+									<c:when test="${resTypeList.size()==0}">
+										<tr align="center">
+											<td><font color="red">办公用品类别不存在!</font></td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${resTypeList}" var="resType" varStatus="status">
+											<tr>
+												<td><input type="text" name="title-1" id="title-1" value="${resType.title}" class="form-control"></td>
+												<td><button class="btn btn-info" id="editBtn-1"><span class="fa fa-pencil-square"></span> 修改</button>
+													<a href="pages/type/subtype_list.jsp" class="btn btn-warning"><span class="fa fa-list-alt"></span> 查看子栏目</a></td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</table>
 							<jsp:include page="/pages/plugins/include_alert.jsp"/>  
 						</div>

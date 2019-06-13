@@ -5,7 +5,8 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+<%@page isELIgnored="false" %>
+<%@taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -39,77 +40,31 @@
 									<th>是否需要返还</th>
 									<th>操作</th>
 								</tr>
-								<tr>
-									<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 记事本</td>
-									<td>2018-09-15</td>
-									<td>20</td>
-									<td>可领取</td>
-									<td>不返还</td>
-									<td>
-										<button class="btn btn-primary btn-xs">加入领取清单</button>
-										<a class="btn btn-warning btn-xs" href="pages/res/res_append.jsp">追加</a>
-									</td>
-								</tr>
-								<tr>
-									<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 记事本</td>
-									<td>2018-09-15</td>
-									<td>20</td>
-									<td>可领取</td>
-									<td>不返还</td>
-									<td>
-										<button class="btn btn-primary btn-xs">加入领取清单</button>
-										<a class="btn btn-warning btn-xs" href="pages/res/res_edit.jsp">追加</a></td>
-								</tr>
-								<tr>
-									<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 记事本</td>
-									<td>2018-09-15</td>
-									<td>20</td>
-									<td>可领取</td>
-									<td>不返还</td>
-									<td>
-										<button class="btn btn-primary btn-xs">加入领取清单</button>
-										<a class="btn btn-warning btn-xs" href="pages/res/res_edit.jsp">追加</a></td>
-								</tr>
-								<tr>
-									<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 记事本</td>
-									<td>2018-09-15</td>
-									<td>20</td>
-									<td>可领取</td>
-									<td>不返还</td>
-									<td>
-										<button class="btn btn-primary btn-xs">加入领取清单</button>
-										<a class="btn btn-warning btn-xs" href="pages/res/res_edit.jsp">追加</a></td>
-								</tr>
-								<tr>
-									<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 记事本</td>
-									<td>2018-09-15</td>
-									<td>20</td>
-									<td>可领取</td>
-									<td>不返还</td>
-									<td>
-										<button class="btn btn-primary btn-xs">加入领取清单</button>
-										<a class="btn btn-warning btn-xs" href="pages/res/res_edit.jsp">追加</a></td>
-								</tr>
-								<tr>
-									<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 记事本</td>
-									<td>2018-09-15</td>
-									<td>20</td>
-									<td>可领取</td>
-									<td>不返还</td>
-									<td>
-										<button class="btn btn-primary btn-xs">加入领取清单</button>
-										<a class="btn btn-warning btn-xs" href="pages/res/res_edit.jsp">追加</a></td>
-								</tr>
-								<tr>
-									<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 记事本</td>
-									<td>2018-09-15</td>
-									<td>20</td>
-									<td>可领取</td>
-									<td>不返还</td>
-									<td>
-										<button class="btn btn-primary btn-xs">加入领取清单</button>
-										<a class="btn btn-warning btn-xs" href="pages/res/res_edit.jsp">追加</a></td>
-								</tr>
+								<c:choose>
+									<c:when test="${resList.size()==0}">
+										<tr>
+											<td colspan="6">
+												<font color="red">没有办公用品!</font>
+											</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${resList}" var="res" varStatus="status">
+											<tr>
+												<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> ${res.title}</td>
+												<td>${res.indate}</td>
+												<td>${res.amount}</td>
+												<td>可领取</td>
+												<td>返还</td>
+												<td>
+													<button class="btn btn-primary btn-xs">加入领取清单</button>
+													<a class="btn btn-warning btn-xs" href="pages/res/res_append.jsp">追加</a>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+
 							</table>
 						</div>
 						<!-- /.box-body -->

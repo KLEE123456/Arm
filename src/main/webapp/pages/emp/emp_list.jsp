@@ -14,9 +14,9 @@
 <jsp:include page="/pages/plugins/include_javascript_head.jsp" />
 <script type="text/javascript" src="js/pages/dept/dept_list.js"></script>
 	<script type="text/javascript">
-		function  delAdm(eid) {
+		function  delAdm(eid,pageNum) {
 			if (confirm("你确定要删除"+eid+"号雇员吗?")){
-				location.href='${pageContext.request.contextPath}/emp/delEmp.action?eid='+eid;
+				location.href='${pageContext.request.contextPath}/emp/delEmp.action?eid='+eid+'&pageNum='+pageNum;
 			}
 		}
 	</script>
@@ -62,8 +62,8 @@
 												<td>${emp.phone}</td>
 												<td>${emp.sex}</td>
 												<td>${emp.salary}</td>
-												<td><a class="btn btn-warning btn-xs" href="${pageContext.request.contextPath}/emp/XREmp.action?eid=${emp.eid}">编辑</a>
-												<a class="btn btn-warning btn-xs" href="javascript:void(0)" onclick="delAdm('${emp.eid}')">删除</a>
+												<td><a class="btn btn-warning btn-xs" href="${pageContext.request.contextPath}/emp/XREmp.action?eid=${emp.eid}&pageNum=${pageInfo.pageNum}">编辑</a>
+												<a class="btn btn-warning btn-xs" href="javascript:void(0)" onclick="delAdm('${emp.eid}','${pageInfo.pageNum}')">删除</a>
 												</td>
 											</tr>
 										</c:forEach>
@@ -76,6 +76,17 @@
 					<!-- /.box -->
 				</div>
 			</div>
+			<div style="margin-left: 36%">
+				<font style="align:center">当前页是第${pageInfo.pageNum}页，总共${pageInfo.pages}页，总记录数${pageInfo.total}条</font>
+			</div>
+			<div style="margin-left: 35%">
+				<ul class="pagination">
+					<li><a href="${pageContext.request.contextPath}/emp/findEmps.action?pageNum=1">首页</a></li>
+					<li><a href="${pageContext.request.contextPath}/emp/findEmps.action?pageNum=${pageInfo.prePage}">上一页</a></li>
+					<li><a href="${pageContext.request.contextPath}/emp/findEmps.action?pageNum=${pageInfo.nextPage}">下一页</a></li>
+					<li><a href="${pageContext.request.contextPath}/emp/findEmps.action?pageNum=${pageInfo.pages}">尾页</a></li>
+				</ul>
+			</div>
 		</div>
 		<!-- 导入公司尾部认证信息 -->
 		<jsp:include page="/pages/plugins/include_title_foot.jsp" />
@@ -84,5 +95,6 @@
 		<div class="control-sidebar-bg"></div>
 	</div>
 	<jsp:include page="/pages/plugins/include_javascript_foot.jsp" />
+
 </body>
 </html>

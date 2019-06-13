@@ -48,9 +48,9 @@
 					<span>办公用品</span> <i class="fa fa-angle-left pull-right"></i>
 			</a>
 				<ul class="treeview-menu">
-					<li><a href="pages/type/type_list.jsp"><i 
+					<li><a href="${pageContext.request.contextPath}/res/findResType.action"><i
 							class="fa fa-circle-o"></i> 用品分类</a></li>
-					<li><a href="pages/res/res_list.jsp"><i
+					<li><a href="${pageContext.request.contextPath}/res/findRes.action"><i
 							class="fa fa-circle-o"></i> 办公用品列表</a></li>
 					<li><a href="pages/res/res_emp_list.jsp"><i
 							class="fa fa-circle-o"></i> 领取记录</a></li>

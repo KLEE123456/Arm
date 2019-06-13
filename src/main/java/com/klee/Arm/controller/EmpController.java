@@ -1,5 +1,7 @@
 package com.klee.Arm.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.klee.Arm.pojo.Emp;
 import com.klee.Arm.service.EmpService;
 import com.klee.Arm.utils.FileUpload;
@@ -33,9 +35,11 @@ public class EmpController {
      * @return
      */
     @RequestMapping(value = "findEmp")
-    public String findEmp(Model model){
-        List<Emp> empList = empService.findAdm();
+    public String findEmp(Model model,Integer pageNum){
+        List<Emp> empList = empService.findAdm(pageNum);
+        PageInfo pageInfo=new PageInfo(empList);
         model.addAttribute("empList",empList);
+        model.addAttribute("pageInfo",pageInfo);
         return "admin/admin_list";
     }
 
@@ -47,9 +51,10 @@ public class EmpController {
      * @return
      */
     @RequestMapping(value = "XREmp")
-    public String xREmp(int eid, Model model, HttpSession session,String method){
+    public String xREmp(int eid, Model model, HttpSession session,String method,Integer pageNum){
         Emp emp = empService.xRAdm(eid);
         session.setAttribute("password",emp.getPassword());
+        session.setAttribute("pageNum",pageNum);
         model.addAttribute("emp",emp);
         if (method==null){
             //回填到雇员编辑界面
@@ -73,6 +78,8 @@ public class EmpController {
     @RequestMapping(value = "editEmp")
     public String editEmp(Emp emp, List<MultipartFile> uploadfile, HttpServletRequest request,Model model,String method,HttpSession session){
         FileUpload.fileUpload(uploadfile,emp,request);
+        //拿到session中的页码
+        Integer pageNum=(Integer) session.getAttribute("pageNum");
         //拿到用户编辑后的密码，比较是否进行了更改
         String password=emp.getPassword();
         int rows;
@@ -94,11 +101,11 @@ public class EmpController {
             }
             if (method==null){
                 //转发到雇员列表
-                return  "forward:findEmps.action";
+                return  "forward:findEmps.action?pageNum="+pageNum;
             }
             else {
                 //转发到管理员列表
-                return "forward:findEmp.action";
+                return "forward:findEmp.action?pageNum="+pageNum;
             }
         }
         else {
@@ -159,9 +166,11 @@ public class EmpController {
      * @return
      */
     @RequestMapping(value = "findEmps")
-    public  String  findEmps(Model model){
-        List<Emp> empList = empService.findEmp();
+    public  String  findEmps(Model model,Integer pageNum){
+        List<Emp> empList = empService.findEmp(pageNum);
+        PageInfo pageInfo=new PageInfo(empList);
         model.addAttribute("empList",empList);
+        model.addAttribute("pageInfo",pageInfo);
         return "emp/emp_list";
     }
 
@@ -196,10 +205,10 @@ public class EmpController {
      * @throws IOException
      */
     @RequestMapping(value = "delAdm")
-    public String delAdm(int eid, HttpServletResponse response) throws IOException {
+    public String delAdm(int eid, HttpServletResponse response,Integer pageNum) throws IOException {
         int rows = empService.delEmp(eid);
         if (rows>0){
-            return "forward:findEmp.action";
+            return "forward:findEmp.action?pageNum="+pageNum;
         }
         else {
             PrintWriter out=response.getWriter();
@@ -218,10 +227,10 @@ public class EmpController {
      * @throws IOException
      */
     @RequestMapping(value = "delEmp")
-    public String delEmp(int eid, HttpServletResponse response) throws IOException {
+    public String delEmp(int eid, HttpServletResponse response,Integer pageNum) throws IOException {
         int rows = empService.delEmp(eid);
         if (rows>0){
-            return "forward:findEmps.action";
+            return "forward:findEmps.action?pageNum="+pageNum;
         }
         else {
             PrintWriter out=response.getWriter();
