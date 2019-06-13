@@ -42,5 +42,10 @@ public class EmpServiceImpl implements EmpService {
         return empDao.addEmp(emp);
     }
 
+    @Override
+    public int delEmp(int eid) {
+        return empDao.delEmp(eid);
+    }
+
 
 }

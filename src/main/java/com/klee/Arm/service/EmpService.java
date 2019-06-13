@@ -11,4 +11,5 @@ public interface EmpService {
     int addAdm(Emp emp);
     List<Emp> findEmp();
     int addEmp(Emp emp);
+    int delEmp(int eid);
 }

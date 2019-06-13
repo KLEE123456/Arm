@@ -13,6 +13,13 @@
 <base href="<%=basePath%>">
 <jsp:include page="/pages/plugins/include_javascript_head.jsp" />
 <script type="text/javascript" src="js/pages/dept/dept_list.js"></script>
+	<script type="text/javascript">
+		function  delAdm(eid) {
+			if (confirm("你确定要删除"+eid+"号雇员吗?")){
+				location.href='${pageContext.request.contextPath}/emp/delEmp.action?eid='+eid;
+			}
+		}
+	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -42,7 +49,7 @@
 								<c:choose>
 									<c:when test="${empList.size()==0}">
 										<tr>
-											<td colspan="6">
+											<td colspan="7">
 												<font color="red">不存在雇员信息!</font>
 											</td>
 										</tr>
@@ -55,7 +62,9 @@
 												<td>${emp.phone}</td>
 												<td>${emp.sex}</td>
 												<td>${emp.salary}</td>
-												<td><a class="btn btn-warning btn-xs" href="${pageContext.request.contextPath}/emp/XREmp.action?eid=${emp.eid}">编辑</a></td>
+												<td><a class="btn btn-warning btn-xs" href="${pageContext.request.contextPath}/emp/XREmp.action?eid=${emp.eid}">编辑</a>
+												<a class="btn btn-warning btn-xs" href="javascript:void(0)" onclick="delAdm('${emp.eid}')">删除</a>
+												</td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>

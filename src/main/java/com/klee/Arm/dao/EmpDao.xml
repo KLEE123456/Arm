@@ -57,4 +57,7 @@
         insert  into  emp
         values (#{eid} ,#{did} ,#{lid} ,1000 ,#{name} ,#{password} ,#{phone} ,#{salary} ,#{note} ,#{aflag} ,#{sex} ,#{photo} )
    </insert>
+  <delete id="delEmp" parameterType="int">
+      delete from emp  where eid=#{eid}
+  </delete>
 </mapper>

@@ -5,7 +5,8 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+<%@ page isELIgnored="false" %>
+<%@taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -34,31 +35,24 @@
 									<th width="80%">名称</th>
 									<th colspan="2">操作</th>
 								</tr>
-								<tr>
-									<td><input type="text" name="title-1" id="title-1" value="管理部" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-1"><span class="fa fa-pencil-square"></span> 修改</button></td>
-									<td><a class="btn btn-warning" href="pages/groups/groups_list.jsp">查看权限</a></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="title-2" id="title-2" value="人事部" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-2"><span class="fa fa-pencil-square"></span> 修改</button></td>
-									<td><a class="btn btn-warning" href="pages/groups/groups_list.jsp">查看权限</a></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="title-3" id="title-3" value="行政部" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-3"><span class="fa fa-pencil-square"></span> 修改</button></td>
-									<td><a class="btn btn-warning" href="pages/groups/groups_list.jsp">查看权限</a></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="title-4" id="title-4" value="市场部" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-4"><span class="fa fa-pencil-square"></span> 修改</button></td>
-									<td><a class="btn btn-warning" href="pages/groups/groups_list.jsp">查看权限</a></td>
-								</tr>
-								<tr>
-									<td><input type="text" name="title-5" id="title-5" value="财务部" class="form-control"></td>
-									<td><button class="btn btn-info" id="editBtn-5"><span class="fa fa-pencil-square"></span> 修改</button></td>
-									<td><a class="btn btn-warning" href="pages/groups/groups_list.jsp">查看权限</a></td>
-								</tr>
+								<c:choose>
+									<c:when test="${depList.size()==0}">
+										<tr align="center">
+											<td colspan="3">
+												<font color="red">不存在部门!</font>
+											</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${depList}" var="dep" varStatus="status">
+											<tr>
+												<td><input type="text" name="title-1" id="title-1" value="${dep.title}" class="form-control"></td>
+												<td><button class="btn btn-info" id="editBtn-1"><span class="fa fa-pencil-square"></span> 修改</button></td>
+												<td><a class="btn btn-warning" href="pages/groups/groups_list.jsp">查看权限</a></td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</table>
 							<jsp:include page="/pages/plugins/include_alert.jsp"/> 
 						</div>

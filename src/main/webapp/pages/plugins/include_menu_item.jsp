@@ -37,7 +37,7 @@
 					<span>人事管理</span> <i class="fa fa-angle-left pull-right"></i>
 			</a>
 				<ul class="treeview-menu">
-					<li><a href="pages/dept/dept_list.jsp"><i
+					<li><a href="${pageContext.request.contextPath}/dep/findDeps.action"><i
 							class="fa fa-circle-o"></i> 部门列表</a></li>
 					<li><a href="pages/emp/emp_add.jsp"><i
 							class="fa fa-circle-o"></i> 增加员工</a></li>

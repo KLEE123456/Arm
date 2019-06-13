@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -58,7 +62,7 @@ public class EmpController {
     }
 
     /**
-     * 管理员编辑
+     * 管理员、雇员编辑
      * @param emp
      * @param uploadfile
      * @param request
@@ -113,7 +117,7 @@ public class EmpController {
     }
 
     /**
-     * 管理员编号检测
+     * 编号检测
      * @param eid
      * @return
      */
@@ -161,7 +165,14 @@ public class EmpController {
         return "emp/emp_list";
     }
 
-
+    /**
+     * 新增雇员
+     * @param emp
+     * @param uploadfile
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "addEmps")
     public String addEmps(Emp emp,List<MultipartFile> uploadfile,Model model,HttpServletRequest request){
         FileUpload.fileUpload(uploadfile,emp,request);
@@ -176,4 +187,50 @@ public class EmpController {
             return "emp/emp_add";
         }
     }
+
+    /**
+     * 管理员删除
+     * @param eid
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "delAdm")
+    public String delAdm(int eid, HttpServletResponse response) throws IOException {
+        int rows = empService.delEmp(eid);
+        if (rows>0){
+            return "forward:findEmp.action";
+        }
+        else {
+            PrintWriter out=response.getWriter();
+            out.println("<script>alert('Delete Failed!');location.href='/emp/findEmp.action'</script>");
+            out.flush();
+            out.close();
+            return "";
+        }
+    }
+
+    /**
+     * 雇员删除
+     * @param eid
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "delEmp")
+    public String delEmp(int eid, HttpServletResponse response) throws IOException {
+        int rows = empService.delEmp(eid);
+        if (rows>0){
+            return "forward:findEmps.action";
+        }
+        else {
+            PrintWriter out=response.getWriter();
+            out.println("<script>alert('Delete Failed!');location.href='/emp/findEmps.action'</script>");
+            out.flush();
+            out.close();
+            return "";
+        }
+    }
+
+
 }
