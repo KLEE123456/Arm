@@ -72,6 +72,7 @@
 									</c:otherwise>
 								</c:choose>
 							</table>
+
 						</div>
 						<!-- /.box-body -->
 					</div>
