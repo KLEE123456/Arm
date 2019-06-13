@@ -14,9 +14,6 @@ public class EmpServiceImpl implements EmpService {
     private EmpDao empDao;
     @Override
     public List<Emp> findAdm(Integer pageNum) {
-        if (pageNum==null){
-            pageNum=1;
-        }
         PageHelper.startPage(pageNum,2);
         List<Emp> empList=empDao.findAdm();
         return empList;
@@ -39,9 +36,6 @@ public class EmpServiceImpl implements EmpService {
 
     @Override
     public List<Emp> findEmp(Integer pageNum) {
-        if (pageNum==null){
-            pageNum=1;
-        }
         PageHelper.startPage(pageNum,5);
         List<Emp> empList=empDao.findEmp();
         return empList;

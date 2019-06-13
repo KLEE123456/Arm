@@ -28,7 +28,7 @@
 					class="fa fa-angle-left pull-right"></i>
 			</a>
 				<ul class="treeview-menu">
-					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action"><i class="fa fa-circle-o"></i>
+					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=1"><i class="fa fa-circle-o"></i>
 							管理员列表</a></li>
 					<li><a href="pages/admin/admin_add.jsp"><i class="fa fa-circle-o"></i>
 							增加管理员</a></li>
@@ -41,7 +41,7 @@
 							class="fa fa-circle-o"></i> 部门列表</a></li>
 					<li><a href="pages/emp/emp_add.jsp"><i
 							class="fa fa-circle-o"></i> 增加员工</a></li>
-					<li><a href="${pageContext.request.contextPath}/emp/findEmps.action"><i
+					<li><a href="${pageContext.request.contextPath}/emp/findEmps.action?pageNum=1"><i
 							class="fa fa-circle-o"></i> 员工列表</a></li>
 				</ul></li>
 			<li class="treeview"><a href="<%=basePath%>pages/index.jsp"> <i class="fa  fa-folder-open"></i>

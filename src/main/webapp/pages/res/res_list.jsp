@@ -51,7 +51,7 @@
 									<c:otherwise>
 										<c:forEach items="${resList}" var="res" varStatus="status">
 											<tr>
-												<td><img src="upload/res/nophoto.png" class="img" style="width:30px;"> ${res.title}</td>
+												<td><img src="${pageContext.request.contextPath}/${res.photo}" class="img" style="width:30px;"> ${res.title}</td>
 												<td>${res.indate}</td>
 												<td>${res.amount}</td>
 												<td>可领取</td>
