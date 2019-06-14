@@ -152,7 +152,7 @@ public class EmpController {
         emp.setPassword(Md5Encrypt.MD5(password));
         int rows=empService.addAdm(emp);
         if (rows>0){
-            return "forward:findEmp.action";
+            return "forward:findEmp.action?pageNum=1";
         }
         else {
             model.addAttribute("addError","添加失败,请于管理员联系!");
@@ -189,7 +189,7 @@ public class EmpController {
         emp.setPassword(Md5Encrypt.MD5(password));
         int rows = empService.addEmp(emp);
         if (rows>0){
-            return "forward:findEmps.action";
+            return "forward:findEmps.action?pageNum=1";
         }
         else {
             model.addAttribute("addError","添加失败,请于管理员联系!");
@@ -240,6 +240,5 @@ public class EmpController {
             return "";
         }
     }
-
 
 }
