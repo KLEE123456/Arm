@@ -12,4 +12,5 @@ public interface EmpService {
     List<Emp> findEmp(Integer pageNum);
     int addEmp(Emp emp);
     int delEmp(int eid);
+    int findEid();
 }

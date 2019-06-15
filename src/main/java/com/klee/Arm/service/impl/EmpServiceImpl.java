@@ -6,8 +6,12 @@ import com.klee.Arm.pojo.Emp;
 import com.klee.Arm.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+@Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = false)
 @Service
 public class EmpServiceImpl implements EmpService {
     @Autowired
@@ -52,6 +56,10 @@ public class EmpServiceImpl implements EmpService {
         return empDao.delEmp(eid);
     }
 
+    @Override
+    public int findEid() {
+        return empDao.findEid();
+    }
 
 
 }

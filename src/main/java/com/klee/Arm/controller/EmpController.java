@@ -241,4 +241,25 @@ public class EmpController {
         }
     }
 
+    /**
+     * 查找eid
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "findEid")
+    public String findEid(Model model,String method){
+        //获取到最大的雇员的编号
+        int eid = empService.findEid();
+        System.out.println(eid);
+        //创建新增雇员编号
+        eid=eid+1;
+        model.addAttribute("eid",eid);
+        if (method==null){
+            return "admin/admin_add";
+        }
+        else {
+            return "emp/emp_add";
+        }
+    }
+
 }

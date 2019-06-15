@@ -60,7 +60,7 @@
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
 											<input type="text" id="eid" name="eid" class="form-control"
-												placeholder="请输入雇员编号">
+												placeholder="请输入雇员编号" value="${eid}" readonly="readonly">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="eidMsg" style="color:red;"></div>

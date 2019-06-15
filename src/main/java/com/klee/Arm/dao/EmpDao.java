@@ -12,4 +12,5 @@ public interface EmpDao {
     List<Emp> findEmp();
     int addEmp(Emp emp);
     int delEmp(int eid);
+    int findEid();
 }

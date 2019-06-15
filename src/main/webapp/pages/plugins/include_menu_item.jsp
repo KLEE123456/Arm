@@ -6,6 +6,11 @@
 			+ path + "/";
 %>
 <%@page isELIgnored="false" %>
+<style type="text/css">
+	a{
+		transition:none;
+	}
+</style>
 <aside class="main-sidebar">
 	<!-- sidebar: style can be found in sidebar.less -->
 	<section class="sidebar">
@@ -30,7 +35,7 @@
 				<ul class="treeview-menu">
 					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=1"><i class="fa fa-circle-o"></i>
 							管理员列表</a></li>
-					<li><a href="pages/admin/admin_add.jsp"><i class="fa fa-circle-o"></i>
+					<li><a href="${pageContext.request.contextPath}/emp/findEid.action"><i class="fa fa-circle-o"></i>
 							增加管理员</a></li>
 				</ul></li>
 			<li class="treeview"><a href="<%=basePath%>pages/index.jsp"> <i class="fa  fa-folder-open"></i>
@@ -39,7 +44,7 @@
 				<ul class="treeview-menu">
 					<li><a href="${pageContext.request.contextPath}/dep/findDeps.action"><i
 							class="fa fa-circle-o"></i> 部门列表</a></li>
-					<li><a href="pages/emp/emp_add.jsp"><i
+					<li><a href="${pageContext.request.contextPath}/emp/findEid.action?method=emp"><i
 							class="fa fa-circle-o"></i> 增加员工</a></li>
 					<li><a href="${pageContext.request.contextPath}/emp/findEmps.action?pageNum=1"><i
 							class="fa fa-circle-o"></i> 员工列表</a></li>

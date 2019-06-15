@@ -60,4 +60,7 @@
   <delete id="delEmp" parameterType="int">
       delete from emp  where eid=#{eid}
   </delete>
+    <select id="findEid" resultType="int">
+       select max(eid) eid from emp
+    </select>
 </mapper>
