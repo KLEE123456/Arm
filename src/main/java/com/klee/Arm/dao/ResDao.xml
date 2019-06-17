@@ -7,7 +7,12 @@
     <select id="findResType" resultType="restype">
         select * from  type
     </select>
-    <select id="findRes" resultType="res">
+    <select id="findRes" resultType="res" parameterType="map">
         select * from res
+        <where>
+            <if test="resName != null and resName != ''">
+                and title like concat('%',#{resName},'%')
+            </if>
+        </where>
     </select>
 </mapper>

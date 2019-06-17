@@ -22,11 +22,6 @@
 	}
 
 </script>
-	<style type="text/css">
-		a{
-			transition:none;
-		}
-	</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -91,9 +86,9 @@
 			<div style="margin-left: 35%">
 				<ul class="pagination">
 					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=1" rel="external">首页</a></li>
-					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=${pageInfo.prePage}" rel="external">上一页</a></li>
-					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=${pageInfo.nextPage}" rel="external">下一页</a></li>
-					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=${pageInfo.pages}" rel="external">尾页</a></li>
+					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=${pageInfo.prePage}" >上一页</a></li>
+					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=${pageInfo.nextPage}" >下一页</a></li>
+					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=${pageInfo.pages}" >尾页</a></li>
 				</ul>
 			</div>
 		</div>

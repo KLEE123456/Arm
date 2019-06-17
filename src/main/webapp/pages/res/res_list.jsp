@@ -68,7 +68,17 @@
 							</table>
 						</div>
 						<!-- /.box-body -->
-						<jsp:include page="/pages/plugins/split_page_plugin_bar.jsp"/>
+						<span style="margin-left: 38%">
+							当前页第${pageInfo.pageNum}页,总页数${pageInfo.pages}页,总记录条数${pageInfo.total}条
+						</span>
+						<div style="margin-left: 38%">
+							<ul class="pagination">
+								<li><a href="${pageContext.request.contextPath}/res/findRes.action?pageNum=1">首页</a></li>
+								<li><a href="${pageContext.request.contextPath}/res/findRes.action?pageNum=${pageInfo.prePage}">上一页</a></li>
+								<li><a href="${pageContext.request.contextPath}/res/findRes.action?pageNum=${pageInfo.nextPage}">下一页</a></li>
+								<li><a href="${pageContext.request.contextPath}/res/findRes.action?pageNum=${pageInfo.pages}">尾页</a></li>
+							</ul>
+						</div>
 					</div>
 					<!-- /.box -->
 				</div>

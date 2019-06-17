@@ -1,5 +1,6 @@
 package com.klee.Arm.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.klee.Arm.dao.ResDao;
 import com.klee.Arm.pojo.Res;
 import com.klee.Arm.pojo.ResType;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+
 @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,readOnly = false)
 @Service
 public class ResServiceImpl implements ResService {
@@ -22,7 +25,9 @@ public class ResServiceImpl implements ResService {
     }
 
     @Override
-    public List<Res> findRes() {
-        return resDao.findRes();
+    public List<Res> findRes(Integer pageNum,Map map) {
+        PageHelper.startPage(pageNum,3);
+        List<Res> resList = resDao.findRes(map);
+        return resList;
     }
 }

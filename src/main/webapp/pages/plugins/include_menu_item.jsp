@@ -33,7 +33,7 @@
 					class="fa fa-angle-left pull-right"></i>
 			</a>
 				<ul class="treeview-menu">
-					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=1"><i class="fa fa-circle-o"></i>
+					<li><a href="${pageContext.request.contextPath}/emp/findEmp.action?pageNum=1" ><i class="fa fa-circle-o"></i>
 							管理员列表</a></li>
 					<li><a href="${pageContext.request.contextPath}/emp/findEid.action"><i class="fa fa-circle-o"></i>
 							增加管理员</a></li>
@@ -55,13 +55,13 @@
 				<ul class="treeview-menu">
 					<li><a href="${pageContext.request.contextPath}/res/findResType.action"><i
 							class="fa fa-circle-o"></i> 用品分类</a></li>
-					<li><a href="${pageContext.request.contextPath}/res/findRes.action"><i
+					<li><a href="${pageContext.request.contextPath}/res/findRes.action?pageNum=1&method=res"><i
 							class="fa fa-circle-o"></i> 办公用品列表</a></li>
 					<li><a href="pages/res/res_emp_list.jsp"><i
 							class="fa fa-circle-o"></i> 领取记录</a></li>
 					<li><a href="pages/res/res_preget.jsp"><i
 							class="fa fa-circle-o"></i> 待领清单</a></li>
-					<li><a href="pages/res/res_prebuy.jsp"><i
+					<li><a href="${pageContext.request.contextPath}/details/findDetail.action"><i
 							class="fa fa-circle-o"></i> 待购清单</a></li>
 					<li><a href="pages/purchase/purchase_list.jsp"><i
 							class="fa fa-circle-o"></i> 购入申请</a></li>

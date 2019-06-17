@@ -10,8 +10,20 @@
 	String keyWord = (String)request.getAttribute("keyWord") ;
 	String column = (String)request.getAttribute("column") ;
 %>
+<script type="text/javascript">
+	$(function () {
+		$("#checkBtn").click(function () {
+			var val=$("#kw").val();
+			if (val==''){
+				alert('请输入查询的内容!');
+				return 0;
+			}
+			$("#splitSearchForm").submit();
+		})
+	})
+</script>
 <div class="row">
-	<form action="xx.action" method="post" class="form-group"
+	<form action="${pageContext.request.contextPath}/res/findRes.action?pageNum=1" method="post" class="form-group"
 		id="splitSearchForm">
 		<fieldset>
 			<div class="form-group">
@@ -36,11 +48,11 @@
 					}
 				%>
 				<div class="col-md-5">
-					<input type="text" name="kw" id="kw" class="form-control input-sm"
-						value="${keyWord}" placeholder="请输入检索关键字">
+					<input type="text" name="resName" id="kw" class="form-control input-sm"
+						 placeholder="请输入检索关键字" value="${resNames}">
 				</div>
 				<div class="col-md-2">
-					<button type="button" onclick="goSplit(1)" class="btn btn-primary">检索</button>
+					<button type="button" class="btn btn-primary" id="checkBtn">检索</button>
 					<input type="hidden" name="${paramName}" value="${paramValue}">
 					<input type="hidden" name="cp" value="1">
 				</div>

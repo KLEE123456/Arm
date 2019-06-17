@@ -5,13 +5,26 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
+<%@page isELIgnored="false" %>
+<%@taglib prefix="c" uri="/WEB-INF/c.tld" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <base href="<%=basePath%>">
 <jsp:include page="/pages/plugins/include_javascript_head.jsp" />
-<script type="text/javascript" src="js/pages/res/res_prebuy.js"></script> 
+<script type="text/javascript" src="js/pages/res/res_prebuy.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$("#rmBtn").click(function () {
+				var rids=$("input[name='did']:checked");
+				var ridArray=new Array();
+				for (var i=0;i<rids.length;i++){
+					ridArray.push(rids[i].value);
+				}
+				location.href='${pageContext.request.contextPath}/details/delDetals.action?ridArray='+ridArray;
+			})
+		})
+	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -40,48 +53,35 @@
 									<th class="text-center"><strong>购买数量</strong></th>
 									<th class="text-center"><strong>操作</strong></th>
 								</tr>
-								<tr>
-									<td class="text-center">
-										<input type="checkbox" id="rid" name="rid" value="1">
-									</td>
-									<td class="text-center"><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 记事本</a>
-									</td>
-									<td class="text-center"><span id="price-1">79.8</span></td>
-									<td class="text-center">
-										<button class="btn btn-primary" id="sub-1">-</button>
-										<input type="text" id="amount-1" name="amount-1" class="shopcar-form-control" size="4" maxlength="4" value="20">
-										<button class="btn btn-primary" id="add-1">+</button> 
-									</td>
-									<td class="text-center"><a href="pages/res/res_edit.jsp?rid=1" class="btn btn-warning">编辑</a></td>
-								</tr>
-								<tr> 
-									<td class="text-center">
-										<input type="checkbox" id="rid" name="goods.gid" value="2">
-									</td>
-									<td class="text-center"><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 铅笔</a>
-									</td>
-									<td class="text-center"><span id="price-2">79.8</span></td>
-									<td class="text-center">
-										<button class="btn btn-primary" id="sub-2">-</button>
-										<input type="text" id="amount-2" name="amount-2" class="shopcar-form-control" size="4" maxlength="4" value="20">
-										<button class="btn btn-primary" id="add-2">+</button> 
-									</td>
-									<td class="text-center"><a href="pages/res/res_edit.jsp?rid=2" class="btn btn-warning">编辑</a></td>
-								</tr>
-								<tr> 
-									<td class="text-center">
-										<input type="checkbox" id="rid" name="goods.gid" value="2">
-									</td>
-									<td class="text-center"><img src="upload/res/nophoto.png" class="img" style="width:30px;"> 追加购买</a>
-									</td>
-									<td class="text-center"><span id="price-2">79.8</span></td>
-									<td class="text-center">
-										<button class="btn btn-primary" id="sub-2">-</button>
-										<input type="text" id="amount-2" name="amount-2" class="shopcar-form-control" size="4" maxlength="4" value="20">
-										<button class="btn btn-primary" id="add-2">+</button> 
-									</td>
-									<td class="text-center"></td>
-								</tr>
+									<c:choose>
+										<c:when test="${detailsList.size()==0}">
+											<tr align="center">
+												<td colspan="4">
+													<span style="color: red">
+														没有待购商品!
+													</span>
+												</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach items="${detailsList}" varStatus="status" var="detail">
+												<tr>
+													<td class="text-center">
+														<input type="checkbox" id="did" name="did" value="${detail.did}">
+													</td>
+													<td class="text-center"><a><img src="${pageContext.request.contextPath}/${detail.photo}" class="img" style="width:30px;">${detail.title}</a>
+													</td>
+													<td class="text-center"><span id="price-1">${detail.price}</span></td>
+													<td class="text-center">
+														<button class="btn btn-primary" id="sub-1">-</button>
+														<input type="text" id="amount-1" name="amount-1" class="shopcar-form-control" size="4" maxlength="4" value="20">
+														<button class="btn btn-primary" id="add-1">+</button>
+													</td>
+													<td class="text-center"><a href="pages/res/res_edit.jsp?rid=1" class="btn btn-warning">编辑</a></td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 							</table>
 							<div class="text-right">
 								总价￥<span id="allPrice" class="text-danger h2"></span>

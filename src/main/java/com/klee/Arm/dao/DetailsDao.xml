@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klee.Arm.dao.DetailsDao">
+
+    <insert id="addDetail"  parameterType="details">
+        insert  into  details
+        values (default ,1,#{stid} ,#{tid},1,1000,#{title} ,#{price} ,20,#{photo}, #{rflag} )
+    </insert>
+    <select id="findDetail" resultType="details">
+        select * from  details
+    </select>
+    <delete id="delDetails"  parameterType="arraylist">
+        delete from  details where did in
+        <foreach collection="array" item="did" index="index" open="(" separator="," close=")">
+            #{did}
+        </foreach>
+    </delete>
+</mapper>

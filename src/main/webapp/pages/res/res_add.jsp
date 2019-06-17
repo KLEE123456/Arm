@@ -30,7 +30,7 @@
 						</div>
 						<!-- /.box-header -->
 						<div class="">
-							<form class="form-horizontal" action="<%=addUrl%>" id="myform" method="post" enctype="multipart/form-data">
+							<form class="form-horizontal" action="${pageContext.request.contextPath}/details/addDetail.action" id="myform" method="post" enctype="multipart/form-data">
 								<fieldset>
 									<div class="form-group" id="titleDiv">
 										<!-- 定义表单提示文字 -->
@@ -47,7 +47,7 @@
 										<!-- 定义表单提示文字 -->
 										<label class="col-md-3 control-label" for="type.tid">用品分类：</label>
 										<div class="col-md-5">
-											<select id="type.tid" name="type.tid" class="form-control">
+											<select id="type.tid" name="tid" class="form-control">
 												<option value="1">文件档案用品</option>
 												<option value="2">桌面用品</option>
 												<option value="3">办公设备</option>
@@ -62,7 +62,7 @@
 										<!-- 定义表单提示文字 -->
 										<label class="col-md-3 control-label" for="subtype.stid">用品子类：</label>
 										<div class="col-md-5">
-											<select id="subtype.stid" name="subtype.stid" class="form-control">
+											<select id="subtype.stid" name="stid" class="form-control">
 												<option value="1">报告夹</option>
 												<option value="2">分类文件夹</option>
 												<option value="3">电脑夹</option>
@@ -86,13 +86,13 @@
 									</div>
 									<div class="form-group" id="rflagDiv">
 										<!-- 定义表单提示文字 -->
-										<label class="col-md-3 control-label" for="rflag">是否重复使用：</label>
+										<label class="col-md-3 control-label" for="rflag1">是否重复使用：</label>
 										<div class="col-md-5">
 											<div class="radio-inline">
-												<label><input type="radio" name="rflag" id="rflag" value="1" checked>重复使用</label>
+												<label><input type="radio" name="rflag" id="rflag1" value="1" checked>重复使用</label>
 											</div>
 											<div class="radio-inline">
-												<label><input type="radio" name="rflag" id="rflag" value="0">不重复使用</label>
+												<label><input type="radio" name="rflag" id="rflag0" value="0">不重复使用</label>
 											</div>
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
@@ -103,8 +103,8 @@
 										<label class="col-md-3 control-label" for="photo">用品图片：</label>
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
-											<input type="file" id="photo" name="photo" class="form-control"
-												placeholder="请上传员工照片">
+											<input type="file" id="photo" name="fileupload" class="form-control"
+												placeholder="请上传员工照片"  multiple="multiple">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="photoMsg"></div>
@@ -115,6 +115,7 @@
 											<button type="reset" class="btn btn-warning">重置</button>
 										</div>
 									</div>
+									<span style="color: red;text-align: center">${error}</span>
 								</fieldset>
 							</form>
 						</div>
