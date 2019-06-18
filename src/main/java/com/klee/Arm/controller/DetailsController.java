@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "details")
+@RequestMapping(value = "/details/*")
 public class DetailsController {
     @Autowired
     private DetailsService detailsService;
@@ -68,6 +68,39 @@ public class DetailsController {
             out.flush();
             out.close();
             return "";
+        }
+    }
+    @RequestMapping(value = "findDetById")
+    public  String findDetById(int did,Model model){
+        Details details = detailsService.findDetById(did);
+        model.addAttribute("details",details);
+        return "res/res_edit";
+    }
+    @RequestMapping(value = "editDetail")
+    public String editDetail(Details details,List<MultipartFile> fileupload,HttpServletRequest request,Model model) {
+        if (!fileupload.isEmpty()&&fileupload.size()>0){
+            for (MultipartFile file:fileupload){
+                String dirPath=request.getServletContext().getRealPath("/upload/det/");
+                File filePath=new File(dirPath);
+                if (!filePath.exists()){
+                    filePath.mkdirs();
+                }
+                String newFilename=Math.random()*100+".jpg";
+                details.setPhoto("upload/det/"+newFilename);
+                try{
+                    file.transferTo(new File(dirPath+"/"+newFilename));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        int rows = detailsService.editDetail(details);
+        if (rows>0){
+            return "forward:findDetail.action";
+        }
+        else {
+            model.addAttribute("errorMsg","编辑失败!");
+            return "res/res_edit";
         }
     }
 }

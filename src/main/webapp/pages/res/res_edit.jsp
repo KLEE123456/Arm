@@ -6,13 +6,20 @@
 			+ path + "/";
 	String addUrl = basePath + "" ;
 %>
-
+<%@page isELIgnored="false" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <base href="<%=basePath%>">
 <jsp:include page="/pages/plugins/include_javascript_head.jsp" /> 
 <script type="text/javascript" src="js/pages/res/res_add.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			document.getElementById("${details.tid}").selected="selected";
+			document.getElementById("s${details.stid}").selected="selected";
+			document.getElementById("rflag${details.rflag}").checked="checked";
+		})
+	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -30,7 +37,8 @@
 						</div>
 						<!-- /.box-header -->
 						<div class="">
-							<form class="form-horizontal" action="<%=addUrl%>" id="myform" method="post" enctype="multipart/form-data">
+							<form class="form-horizontal" action="${pageContext.request.contextPath}/details/editDetail.action" id="myform" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="did" id="did" value="${details.did}">
 								<fieldset>
 									<div class="form-group" id="titleDiv">
 										<!-- 定义表单提示文字 -->
@@ -38,7 +46,7 @@
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
 											<input type="text" id="title" name="title" class="form-control"
-												placeholder="请输入要购买的用品名称">
+												placeholder="请输入要购买的用品名称" value="${details.title}">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="titleMsg"></div>
@@ -47,12 +55,12 @@
 										<!-- 定义表单提示文字 -->
 										<label class="col-md-3 control-label" for="type.tid">用品分类：</label>
 										<div class="col-md-5">
-											<select id="type.tid" name="type.tid" class="form-control">
-												<option value="1">文件档案用品</option>
-												<option value="2">桌面用品</option>
-												<option value="3">办公设备</option>
-												<option value="4">财务用品</option>
-												<option value="5">办公耗材</option>
+											<select id="type.tid" name="tid" class="form-control">
+												<option value="1" id="1">文件档案用品</option>
+												<option value="2" id="2">桌面用品</option>
+												<option value="3" id="3">办公设备</option>
+												<option value="4" id="4">财务用品</option>
+												<option value="5" id="5">办公耗材</option>
 											</select>
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
@@ -62,12 +70,12 @@
 										<!-- 定义表单提示文字 -->
 										<label class="col-md-3 control-label" for="subtype.stid">用品子类：</label>
 										<div class="col-md-5">
-											<select id="subtype.stid" name="subtype.stid" class="form-control">
-												<option value="1">报告夹</option>
-												<option value="2">分类文件夹</option>
-												<option value="3">电脑夹</option>
-												<option value="4">档案袋</option>
-												<option value="5">名片盒</option>
+											<select id="subtype.stid" name="stid" class="form-control">
+												<option value="1" id="s1">报告夹</option>
+												<option value="2" id="s2">分类文件夹</option>
+												<option value="3" id="s3">电脑夹</option>
+												<option value="4" id="s4">档案袋</option>
+												<option value="5" id="s5">名片盒</option>
 											</select>
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
@@ -79,20 +87,20 @@
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
 											<input type="text" id="price" name="price" class="form-control"
-												placeholder="请输入商品购买单价">
+												placeholder="请输入商品购买单价" value="${details.price}">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="priceMsg"></div>
 									</div>
 									<div class="form-group" id="rflagDiv">
 										<!-- 定义表单提示文字 -->
-										<label class="col-md-3 control-label" for="rflag">是否重复使用：</label>
+										<label class="col-md-3 control-label" for="rflag1">是否重复使用：</label>
 										<div class="col-md-5">
 											<div class="radio-inline">
-												<label><input type="radio" name="rflag" id="rflag" value="1" checked>重复使用</label>
+												<label><input type="radio" name="rflag" id="rflag1" value="1" checked>重复使用</label>
 											</div>
 											<div class="radio-inline">
-												<label><input type="radio" name="rflag" id="rflag" value="0">不重复使用</label>
+												<label><input type="radio" name="rflag" id="rflag0" value="0">不重复使用</label>
 											</div>
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
@@ -103,15 +111,16 @@
 										<label class="col-md-3 control-label" for="photo">用品图片：</label>
 										<div class="col-md-5">
 											<!-- 定义表单输入组件 -->
-											<input type="file" id="photo" name="photo" class="form-control"
-												placeholder="请上传员工照片">
+											<input type="file" id="photo" name="fileupload" class="form-control"
+												placeholder="请上传员工照片"  multiple="multiple">
 										</div>
 										<!-- 定义表单错误提示显示元素 -->
 										<div class="col-md-4" id="photoMsg"></div>
+										<div class="col-md-4" id="Msg">${errorMsg}</div>
 									</div>
 									<div class="form-group">
 										<div class="col-md-5 col-md-offset-3">
-											<button type="submit" class="btn btn-primary">添加</button>
+											<button type="submit" class="btn btn-primary">编辑</button>
 											<button type="reset" class="btn btn-warning">重置</button>
 										</div>
 									</div>

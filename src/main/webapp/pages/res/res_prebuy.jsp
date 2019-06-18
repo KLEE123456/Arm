@@ -73,11 +73,11 @@
 													</td>
 													<td class="text-center"><span id="price-1">${detail.price}</span></td>
 													<td class="text-center">
-														<button class="btn btn-primary" id="sub-1">-</button>
-														<input type="text" id="amount-1" name="amount-1" class="shopcar-form-control" size="4" maxlength="4" value="20">
-														<button class="btn btn-primary" id="add-1">+</button>
+														<button class="btn btn-primary" id="sub-${status.count}">-</button>
+														<input type="text" id="amount-${status.count}" name="amount-${status.count}" class="shopcar-form-control" size="4" maxlength="4" value="20">
+														<button class="btn btn-primary" id="add-${status.count}">+</button>
 													</td>
-													<td class="text-center"><a href="pages/res/res_edit.jsp?rid=1" class="btn btn-warning">编辑</a></td>
+													<td class="text-center"><a href="${pageContext.request.contextPath}/details/findDetById.action?did=${detail.did}" class="btn btn-warning">编辑</a></td>
 												</tr>
 											</c:forEach>
 										</c:otherwise>

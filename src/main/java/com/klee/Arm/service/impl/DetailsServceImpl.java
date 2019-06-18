@@ -29,4 +29,14 @@ public class DetailsServceImpl implements DetailsService {
     public int delDetails(int[] buf) {
         return detailsDao.delDetails(buf);
     }
+
+    @Override
+    public Details findDetById(int did) {
+        return detailsDao.findDetById(did);
+    }
+
+    @Override
+    public int editDetail(Details details) {
+        return detailsDao.editDetail(details);
+    }
 }

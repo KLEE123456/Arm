@@ -8,4 +8,6 @@ public interface DetailsDao {
     List<Details> findDetail();
     int addDetail(Details details);
     int delDetails(int[] buf);
+    Details findDetById(int did);
+    int editDetail(Details details);
 }

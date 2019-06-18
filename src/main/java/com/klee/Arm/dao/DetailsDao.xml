@@ -17,4 +17,11 @@
             #{did}
         </foreach>
     </delete>
+    <select id="findDetById" resultType="details">
+        select * from  details where did=#{did}
+    </select>
+    <update id="editDetail" parameterType="details">
+        update details set stid=#{stid} ,tid=#{tid} ,title=#{title} ,price=#{price} ,photo=#{photo} ,rflag=#{rflag}
+        where did=#{did}
+    </update>
 </mapper>
