@@ -62,8 +62,9 @@ public class DetailsController {
             return "forward:findDetail.action";
         }
         else {
+            response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-            out.println("<script>alert('delete failed!');location.href='/details/findDetail.action'</script>");
+            out.println("<script>alert('删除失败!');location.href='/details/findDetail.action'</script>");
             out.flush();
             out.close();
             return "";

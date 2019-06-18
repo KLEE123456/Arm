@@ -211,8 +211,9 @@ public class EmpController {
             return "forward:findEmp.action?pageNum="+pageNum;
         }
         else {
+            response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-            out.println("<script>alert('Delete Failed!');location.href='/emp/findEmp.action'</script>");
+            out.println("<script>alert('删除失败!');location.href='/emp/findEmp.action?pageNum="+pageNum+"'</script>");
             out.flush();
             out.close();
             return "";
@@ -233,8 +234,9 @@ public class EmpController {
             return "forward:findEmps.action?pageNum="+pageNum;
         }
         else {
+            response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-            out.println("<script>alert('Delete Failed!');location.href='/emp/findEmps.action'</script>");
+            out.println("<script>alert('删除失败!');location.href='/emp/findEmps.action?pageNum="+pageNum+"'</script>");
             out.flush();
             out.close();
             return "";
