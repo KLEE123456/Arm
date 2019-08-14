@@ -22,6 +22,11 @@ public class LoginController{
      */
     @RequestMapping(value = "login")
     public String login(Model model, Emp emp, HttpSession session){
+        if(emp.getEid()==0||emp.getPassword()==null){
+
+            model.addAttribute("msg","请先进行登录!");
+            return "login";
+        }
         String empPwd = emp.getPassword();
         emp.setPassword(Md5Encrypt.MD5(empPwd));
         Emp emp1=loginService.login(emp);
