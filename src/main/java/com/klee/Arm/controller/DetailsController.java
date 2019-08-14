@@ -21,6 +21,12 @@ import java.util.List;
 public class DetailsController {
     @Autowired
     private DetailsService detailsService;
+
+    /**
+     *查找待购清单
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "findDetail")
     public String findDetail(Model model){
         List<Details> detailsList = detailsService.findDetail();
@@ -28,6 +34,15 @@ public class DetailsController {
         model.addAttribute("detailsList",detailsList);
         return "res/res_prebuy";
     }
+
+    /**
+     * 添加待购商品
+     * @param model
+     * @param fileupload
+     * @param details
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "addDetail")
     public String addDetail(Model model, List<MultipartFile> fileupload, Details details, HttpServletRequest request){
         if (!fileupload.isEmpty()&&fileupload.size()>0){
@@ -55,6 +70,14 @@ public class DetailsController {
             return "res/res_add";
         }
     }
+
+    /**
+     * 删除待购商品
+     * @param ridArray
+     * @param response
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "delDetals")
     public String delDetals(int[] ridArray, HttpServletResponse response) throws IOException {
         int rows = detailsService.delDetails(ridArray);
@@ -70,12 +93,28 @@ public class DetailsController {
             return "";
         }
     }
+
+    /**
+     * 编辑渲染
+     * @param did
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "findDetById")
     public  String findDetById(int did,Model model){
         Details details = detailsService.findDetById(did);
         model.addAttribute("details",details);
         return "res/res_edit";
     }
+
+    /**
+     * 编辑待购商品
+     * @param details
+     * @param fileupload
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "editDetail")
     public String editDetail(Details details,List<MultipartFile> fileupload,HttpServletRequest request,Model model) {
         if (!fileupload.isEmpty()&&fileupload.size()>0){
